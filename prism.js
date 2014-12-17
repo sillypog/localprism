@@ -1,15 +1,17 @@
-var http = require('http'),
-    //util = require('util'),
+var connect = require('connect'),
+    http = require('http'),
     url = require('url');
 
-http.createServer(function(req, res){
+var app = connect();
+app.use(function(req, res){
 	var now = new Date();
-	console.log("Activity: "+ now.toString());
+	console.log('Activity: '+ now.toString());
 	console.log(url.parse(req.url, true).query);
-	console.log("\n");
+	console.log('\n');
 
-	res.writeHead(200, {'content-type': 'text/javascript'});
-	res.end("{}");
-}).listen(8124);
+	res.end('{}');
+});
 
-console.log("Server running on 8124");
+http.createServer(app).listen(8124);
+
+console.log('Server running on 8124');
